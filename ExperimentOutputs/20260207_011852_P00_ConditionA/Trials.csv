@@ -1,0 +1,5 @@
+trialIndex,alertNumber,scheduledStartSec,actualStartSec,trialInitiatedUtc,correctDirection,responseDirection,responseTimeSec,reactionTimeSec,outcome
+0,1,2,2.247,2026-02-07T01:18:54.7775687Z,Right,Unknown,-1,-1,Missed
+1,2,9.849,9.863,2026-02-07T01:19:02.3964158Z,Right,Unknown,-1,-1,Missed
+2,3,21.22,21.233,2026-02-07T01:19:13.7739272Z,Right,Unknown,-1,-1,Missed
+3,4,31.27,31.281,2026-02-07T01:19:23.8187037Z,Both,Unknown,-1,-1,Missed

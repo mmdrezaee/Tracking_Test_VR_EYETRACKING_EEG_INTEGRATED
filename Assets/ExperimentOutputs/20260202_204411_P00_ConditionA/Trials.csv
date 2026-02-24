@@ -1,0 +1,2 @@
+session_id,stimulus_name,trial_index,alert_number,scheduled_start_sec,actual_start_sec,trial_initiated_utc,correct_direction,response_direction,response_time_sec,reaction_time_sec,outcome
+20260202_204411_P00_ConditionA,combined_track,1,1,2.0000,2.0907,2026-02-03T03:44:15.4223592Z,Right,Unknown,-1.0000,-1.0000,Missed

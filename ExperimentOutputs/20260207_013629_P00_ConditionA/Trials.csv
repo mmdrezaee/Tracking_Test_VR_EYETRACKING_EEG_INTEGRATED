@@ -1,0 +1,10 @@
+trialIndex,alertNumber,scheduledStartSec,actualStartSec,trialInitiatedUtc,correctDirection,responseDirection,responseTimeSec,reactionTimeSec,outcome
+0,1,2,2.076,2026-02-07T01:36:31.8365336Z,Right,Unknown,-1,-1,Missed
+1,2,9.849,9.863,2026-02-07T01:36:39.6264111Z,Right,Unknown,-1,-1,Missed
+2,3,21.22,21.233,2026-02-07T01:36:50.9824199Z,Right,Unknown,-1,-1,Missed
+3,4,31.27,31.281,2026-02-07T01:37:01.0471987Z,Both,Unknown,-1,-1,Missed
+4,5,38.899,38.919,2026-02-07T01:37:08.6795486Z,Both,Both,40.881,1.963,Correct
+5,6,49.2,49.201,2026-02-07T01:37:18.9723679Z,Both,Right,49.308,0.107,Incorrect
+6,7,58.115,58.119,2026-02-07T01:37:27.8894451Z,Left,Unknown,-1,-1,Missed
+7,8,66.89,66.908,2026-02-07T01:37:36.6814995Z,Left,Unknown,-1,-1,Missed
+8,9,78.335,78.343,2026-02-07T01:37:48.1055197Z,Right,Unknown,-1,-1,Missed

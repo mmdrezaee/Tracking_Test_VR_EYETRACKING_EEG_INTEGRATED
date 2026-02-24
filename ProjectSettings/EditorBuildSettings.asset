@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/OutdoorsScene.unity
+    guid: 8124e5870f4fd4c779e7a5f994e84ad1
+  - enabled: 1
+    path: Assets/Samples/3SL_ iMotions Varjo Integration/2.2.0/HDRP Samples/HDRPExample-iMotions-Varjo
+      (controllers).unity
+    guid: 8c5301a2f444a994394b3915a0fcaebc
+  m_configObjects:
+    Varjo.XR.Settings: {fileID: 11400000, guid: d1cd14ff4a772df44ba8fd63eebe03d1,
+      type: 2}
+    com.threespacelab.imotions.varjo.settings: {fileID: 11400000, guid: 2e1c49c786e0cf245b7de70f8bc8335c,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 5ed68257b18a9ab48b3099a1ec49b8c1,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9ffc0df5eaa31cb47a3fc72c3a3706e4,
+      type: 2}

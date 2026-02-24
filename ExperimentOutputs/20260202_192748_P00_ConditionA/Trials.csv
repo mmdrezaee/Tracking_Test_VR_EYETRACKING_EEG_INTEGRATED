@@ -1,0 +1,7 @@
+﻿trialIndex,plannedStartSeconds,audioTimeAtOnset,onsetRealtime,expectedDirection,responded,responseDirection,responseRealtime,reactionTime,correct,missed,stimulusName,inputCsvName
+1,1,000000,1,002667,6,835466,Right,0,,,,0,1,combined_track,alert_info
+2,2,000000,3,008000,8,842458,Both,0,,,,0,1,combined_track,alert_info
+3,3,000000,4,992000,10,845620,Left,0,,,,0,1,combined_track,alert_info
+4,4,000000,6,997334,12,849840,Right,0,,,,0,1,combined_track,alert_info
+5,5,000000,9,024000,14,853880,Left,0,,,,0,1,combined_track,alert_info
+6,6,000000,11,029330,16,864250,Right,0,,,,0,1,combined_track,alert_info

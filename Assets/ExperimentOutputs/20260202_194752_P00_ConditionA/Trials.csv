@@ -1,0 +1,15 @@
+session_id,stimulus_name,trial_index,alert_number,scheduled_start_sec,actual_start_sec,trial_initiated_utc,correct_direction,response_direction,response_time_sec,reaction_time_sec,outcome
+20260202_194752_P00_ConditionA,combined_track,1,1,2.0000,2.0053,2026-02-03T02:47:56.9078695Z,Right,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,2,2,12.3270,12.3307,2026-02-03T02:48:07.2338695Z,Both,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,3,3,24.6530,24.6613,2026-02-03T02:48:19.5638695Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,4,4,33.0370,33.0453,2026-02-03T02:48:27.9478695Z,Right,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,5,5,42.0490,42.0693,2026-02-03T02:48:36.9718695Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,6,6,53.4570,53.4613,2026-02-03T02:48:48.3638695Z,Right,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,7,7,64.8340,64.8533,2026-02-03T02:48:59.7558695Z,Both,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,8,8,72.8500,72.8533,2026-02-03T02:49:07.7558695Z,Both,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,9,9,81.0500,81.0667,2026-02-03T02:49:15.9698695Z,Both,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,10,10,90.1620,90.1760,2026-02-03T02:49:25.0788695Z,Both,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,11,11,101.6130,101.6320,2026-02-03T02:49:36.5348695Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,12,12,111.4500,111.4667,2026-02-03T02:49:46.3698695Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,13,13,121.1830,121.1947,2026-02-03T02:49:56.0978695Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_194752_P00_ConditionA,combined_track,14,14,133.7880,133.8027,2026-02-03T02:50:08.7058695Z,Left,Unknown,-1.0000,-1.0000,Missed

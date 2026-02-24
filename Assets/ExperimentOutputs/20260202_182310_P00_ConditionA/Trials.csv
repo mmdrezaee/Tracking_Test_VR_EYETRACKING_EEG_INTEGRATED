@@ -1,0 +1,8 @@
+session_id,stimulus_name,trial_index,alert_number,scheduled_start_sec,actual_start_sec,trial_initiated_utc,correct_direction,response_direction,response_time_sec,reaction_time_sec,outcome
+20260202_182310_P00_ConditionA,combined_track,1,1,2.0000,2.0053,2026-02-03T01:23:15.0025792Z,Right,Unknown,-1.0000,-1.0000,Missed
+20260202_182310_P00_ConditionA,combined_track,2,2,12.3270,12.3307,2026-02-03T01:23:25.3285792Z,Both,Unknown,-1.0000,-1.0000,Missed
+20260202_182310_P00_ConditionA,combined_track,3,3,24.6530,24.6613,2026-02-03T01:23:37.6585792Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_182310_P00_ConditionA,combined_track,4,4,33.0370,33.0453,2026-02-03T01:23:46.0425792Z,Right,Unknown,-1.0000,-1.0000,Missed
+20260202_182310_P00_ConditionA,combined_track,5,5,42.0490,42.0693,2026-02-03T01:23:55.0665792Z,Left,Unknown,-1.0000,-1.0000,Missed
+20260202_182310_P00_ConditionA,combined_track,6,6,53.4570,53.4613,2026-02-03T01:24:06.4585792Z,Right,Unknown,-1.0000,-1.0000,Missed
+20260202_182310_P00_ConditionA,combined_track,7,7,64.8340,64.8533,2026-02-03T01:24:17.8505792Z,Both,Unknown,-1.0000,-1.0000,Missed
