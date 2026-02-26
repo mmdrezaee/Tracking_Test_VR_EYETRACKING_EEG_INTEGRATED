@@ -18,8 +18,8 @@ public class ViveThumbstickResponseInput : MonoBehaviour
     [Tooltip("If true, only the dominant axis decides (horizontal vs vertical). Recommended.")]
     public bool requireDominantAxis = true;
 
-    [Tooltip("If true, downward swipes are ignored (only Up counts for Both).")]
-    public bool ignoreDownSwipes = true;
+    [Tooltip("If true, downward swipes are ignored for legacy behavior. When false, both Up and Down swipes count as Equal.")]
+    public bool ignoreDownSwipes = false;
 
     [Header("Touch detection fallback")]
     [Tooltip("If primary2DAxisTouch isn't available, treat primary2DAxisClick as 'touch'.")]
@@ -141,22 +141,23 @@ public class ViveThumbstickResponseInput : MonoBehaviour
             // Horizontal dominates
             if (Mathf.Abs(dx) >= Mathf.Abs(dy))
             {
-                if (dx >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.Right;
-                if (dx <= -minSwipeDistance) return SimpleExperimentVR.AlertDirection.Left;
+                if (dx >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.RightDominant;
+                if (dx <= -minSwipeDistance) return SimpleExperimentVR.AlertDirection.LeftDominant;
                 return SimpleExperimentVR.AlertDirection.Unknown;
             }
 
-            // Vertical dominates
-            if (dy >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.Both;
-            if (!ignoreDownSwipes && dy <= -minSwipeDistance) return SimpleExperimentVR.AlertDirection.Unknown;
+            // Vertical dominates: both Up and Down swipe mean Equal (equal sound)
+            if (dy >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.Equal;
+            if (dy <= -minSwipeDistance) return ignoreDownSwipes ? SimpleExperimentVR.AlertDirection.Unknown : SimpleExperimentVR.AlertDirection.Equal;
             return SimpleExperimentVR.AlertDirection.Unknown;
         }
         else
         {
-            // Not requiring dominance: allow any strong enough component
-            if (dy >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.Both;
-            if (dx >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.Right;
-            if (dx <= -minSwipeDistance) return SimpleExperimentVR.AlertDirection.Left;
+            // Not requiring dominance: allow any strong enough component (Up and Down = Equal)
+            if (dy >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.Equal;
+            if (dy <= -minSwipeDistance) return ignoreDownSwipes ? SimpleExperimentVR.AlertDirection.Unknown : SimpleExperimentVR.AlertDirection.Equal;
+            if (dx >= minSwipeDistance) return SimpleExperimentVR.AlertDirection.RightDominant;
+            if (dx <= -minSwipeDistance) return SimpleExperimentVR.AlertDirection.LeftDominant;
             return SimpleExperimentVR.AlertDirection.Unknown;
         }
     }

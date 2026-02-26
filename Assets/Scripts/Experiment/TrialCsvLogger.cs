@@ -43,8 +43,8 @@ public class TrialCsvLogger : MonoBehaviour
             F(r.scheduledStartSec) + "," +
             F(r.actualStartSec) + "," +
             Escape(r.trialInitiatedUtc) + "," +
-            r.correctDirection.ToString() + "," +
-            r.responseDirection.ToString() + "," +
+            SimpleExperimentVR.DirectionToCsvString(r.correctDirection) + "," +
+            SimpleExperimentVR.DirectionToCsvString(r.responseDirection) + "," +
             F(r.responseTimeSec) + "," +
             F(r.reactionTimeSec) + "," +
             r.outcome;

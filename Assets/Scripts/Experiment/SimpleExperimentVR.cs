@@ -5,7 +5,19 @@ using UnityEngine;
 
 public class SimpleExperimentVR : MonoBehaviour
 {
-    public enum AlertDirection { Left, Both, Right, Unknown }
+    public enum AlertDirection { LeftDominant, RightDominant, Equal, Unknown }
+
+    /// <summary>Labels for trial CSV: left-dominant, right-dominant, equal, unknown.</summary>
+    public static string DirectionToCsvString(AlertDirection d)
+    {
+        switch (d)
+        {
+            case AlertDirection.LeftDominant: return "left-dominant";
+            case AlertDirection.RightDominant: return "right-dominant";
+            case AlertDirection.Equal: return "equal";
+            default: return "unknown";
+        }
+    }
 
     public struct TrialResult
     {
@@ -376,13 +388,13 @@ public class SimpleExperimentVR : MonoBehaviour
         if (string.IsNullOrEmpty(s)) return AlertDirection.Unknown;
         string x = s.Trim().ToLower();
 
-        if (x == "l" || x.Contains("left")) return AlertDirection.Left;
-        if (x == "b" || x.Contains("both") || x.Contains("up") || x.Contains("back")) return AlertDirection.Both;
-        if (x == "r" || x.Contains("right")) return AlertDirection.Right;
+        if (x == "l" || x.Contains("left")) return AlertDirection.LeftDominant;
+        if (x == "b" || x.Contains("both") || x.Contains("up") || x.Contains("back") || x.Contains("equal")) return AlertDirection.Equal;
+        if (x == "r" || x.Contains("right")) return AlertDirection.RightDominant;
 
-        if (x == "0") return AlertDirection.Left;
-        if (x == "1") return AlertDirection.Both;
-        if (x == "2") return AlertDirection.Right;
+        if (x == "0") return AlertDirection.LeftDominant;
+        if (x == "1") return AlertDirection.Equal;
+        if (x == "2") return AlertDirection.RightDominant;
 
         return AlertDirection.Unknown;
     }

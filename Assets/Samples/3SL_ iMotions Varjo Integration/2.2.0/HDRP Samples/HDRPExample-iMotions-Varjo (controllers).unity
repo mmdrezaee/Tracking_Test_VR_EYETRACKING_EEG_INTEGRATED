@@ -388,6 +388,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125320520}
   m_CullTransparentMesh: 1
+--- !u!1 &153580650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153580652}
+  - component: {fileID: 153580651}
+  m_Layer: 0
+  m_Name: BaselineRunner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153580651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153580650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a606b33eb6ea5542b81f188e48fda0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durationSeconds: 300
+  fixationCrossRoot: {fileID: 0}
+  completionDisplaySeconds: 3
+  hideOtherCanvases: 1
+  verboseLogs: 0
+--- !u!4 &153580652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153580650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12999998, y: 1.3569787, z: 0.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &630667982 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6430721217414035088, guid: db3e8915a79a5a24fad07c5a8a07f77f,
@@ -903,6 +952,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 932481161}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1106114119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106114121}
+  - component: {fileID: 1106114120}
+  m_Layer: 0
+  m_Name: SessionConfigurator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1106114120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106114119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6cdcaa1a002b3c4babef7baf530dcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experimentRootPath: C:\Users\rezaeia2\Desktop\Tracking Test Project\Experiment
+  subject: 1
+  session: 0
+  experiment: {fileID: 1709797293}
+  baselineRunner: {fileID: 153580651}
+  verboseLogs: 0
+--- !u!4 &1106114121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106114119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12999998, y: 1.3569787, z: 0.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247807886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,12 +1562,12 @@ MonoBehaviour:
   participantId: P00
   conditionName: ConditionA
   stimulusSource: {fileID: 1709797294}
-  combinedStimulusClip: {fileID: 8300000, guid: e11efcf203d0db140bdfd7a657bdfc5f,
-    type: 3}
+  combinedStimulusClip: {fileID: 0}
   playOnStart: 1
   startDelaySeconds: 0.1
-  alertScheduleCsv: {fileID: 4900000, guid: 05d41c10c8ca7614abd55ba10d1d73ef, type: 3}
+  alertScheduleCsv: {fileID: 0}
   inputCsvCopyName: alert.csv
+  useExternalSessionConfig: 1
   endTrialAtNextStart: 1
   responseWindowSeconds: 2
   endGraceSeconds: 1
