@@ -32,30 +32,6 @@ Outputs are written to per-session folders under `ExperimentOutputs/` as CSV.
 
 ---
 
-## Testing without VR (desktop simulator)
-
-You can run and test the experiment in the Editor (or a desktop build) **without a VR headset or controllers** using the keyboard to simulate responses.
-
-1. **Add the keyboard input**  
-   In your scene, add a GameObject (e.g. “DesktopSimulator”) and add the **KeyboardResponseInput** component (`Assets/Scripts/Experiment/KeyboardResponseInput.cs`). Assign its **experiment** field to your `SimpleExperimentVR` component.
-
-2. **Default keys** (only active when a trial is awaiting a response):
-   - **1** or **Left Arrow** → Left  
-   - **2** or **Up Arrow** → Both  
-   - **3** or **Right Arrow** → Right  
-
-   You can change these in the Inspector (Left Key, Both Key, Right Key and the Alt keys).
-
-3. **Run in Editor**  
-   Press Play. The audio and trial schedule run as usual. When you hear an alert, press **1**, **2**, or **3** (or the arrow keys) to submit the direction. Output CSVs are still written to `ExperimentOutputs/`.
-
-4. **Optional**  
-   Disable or remove **ViveThumbstickResponseInput** on the same scene if you want only keyboard input during testing. With both enabled, whichever input fires first counts.
-
-This does not simulate head or controller pose; it only replaces response input so you can test the trial flow, timing, and CSV/audio without hardware.
-
----
-
 ## One build, many configurations (Experiment folder)
 
 You can run **one build** and select **Subject (1–20)** and **Session (1–24)**. The app loads the matching CSV and Mixed WAV from an external **Experiment** folder.
