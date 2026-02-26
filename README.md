@@ -115,20 +115,6 @@ Important setting:
 
 ## Data output
 
-### VR tracking task screenshot
-
-Once you have a build or are running in the Unity Editor, you can capture a screenshot of the tracking game and add it to the repo, for example at:
-
-- `docs/vr-tracking-task.png`
-
-Then reference it here:
-
-```markdown
-![VR tracking task](docs/vr-tracking-task.png)
-```
-
-This README cannot capture a screenshot automatically; you need to run the scene and save the image from your own machine.
-
 ### Where files go
 
 Session folders are created by `Assets/Scripts/Experiment/ExperimentPaths.cs`:
