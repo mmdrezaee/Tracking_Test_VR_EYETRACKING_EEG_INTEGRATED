@@ -122,7 +122,9 @@ public class SimpleExperimentVR : MonoBehaviour
 
     void Awake()
     {
-        ExperimentPaths.InitSession(participantId, conditionName);
+        // When using configurator, session folder is created in ExperimentSessionConfigurator.Awake so all loggers use the same folder.
+        if (!useExternalSessionConfig)
+            ExperimentPaths.InitSession(participantId, conditionName);
 
         if (!useExternalSessionConfig && alertScheduleCsv != null)
         {
@@ -174,7 +176,7 @@ public class SimpleExperimentVR : MonoBehaviour
     /// </summary>
     public void SetSessionFromExternal(string csvText, AudioClip audioClip)
     {
-        ExperimentPaths.InitSession(participantId, conditionName);
+        // Session folder already created by ExperimentSessionConfigurator.Awake; do not call InitSession again.
 
         string copyPath = ExperimentPaths.PathInSession(inputCsvCopyName);
         ExperimentPaths.WriteAllText(copyPath, csvText);

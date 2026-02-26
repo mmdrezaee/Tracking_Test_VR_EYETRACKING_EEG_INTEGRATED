@@ -31,11 +31,18 @@ public class ExperimentSessionConfigurator : MonoBehaviour
 
     private void Awake()
     {
-        // Session 0 = EEG baseline: init session folder in Awake so loggers see it in their Start()
-        if (session == 0 && experiment != null && subject >= 1 && subject <= 20 && baselineRunner != null)
+        // Init session folder in Awake so all loggers (TrialCsvLogger, EyeTracking, LSL, etc.) use the same folder in their OnEnable/Start.
+        if (experiment == null) return;
+        if (session == 0 && subject >= 1 && subject <= 20 && baselineRunner != null)
         {
             experiment.participantId = "P" + subject.ToString("D2");
             experiment.conditionName = "Baseline";
+            ExperimentPaths.InitSession(experiment.participantId, experiment.conditionName);
+        }
+        else if (session >= 1 && session <= 24 && subject >= 1 && subject <= 20)
+        {
+            experiment.participantId = "P" + subject.ToString("D2");
+            experiment.conditionName = "Sess" + session.ToString("D2");
             ExperimentPaths.InitSession(experiment.participantId, experiment.conditionName);
         }
     }
