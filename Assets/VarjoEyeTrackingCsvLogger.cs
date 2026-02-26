@@ -100,7 +100,7 @@ public class VarjoEyeTrackingCsvLogger : MonoBehaviour
 
         if (_gaze == null || _gaze.Count == 0) return;
 
-        float t = (experiment != null) ? experiment.AudioTime : Time.time;
+        float t = (experiment != null && experiment.IsRunning) ? experiment.AudioTime : Time.time;
 
         int measCount = (_meas != null) ? _meas.Count : 0;
 

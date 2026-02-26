@@ -1,8 +1,8 @@
 ## Tracking Test (VR + Eye Tracking + EEG/LSL) — Unity Project
 
-Unity VR experiment project that plays a scheduled audio stimulus, collects VR controller responses, and logs:
+Unity VR experiment project that runs a **VR target-tracking and sound-localization game**, plays a scheduled audio stimulus, collects VR controller/joystick responses, and logs:
 
-- **Trials / responses** (correct/incorrect/missed, reaction times)
+- **Trials / responses** (correct/incorrect/missed, reaction times for sound direction)
 - **Varjo eye tracking** (gaze ray + pupil/openness; optional gaze raycast hit)
 - **EEG via Lab Streaming Layer (LSL)** (LSL timestamps + channel samples)
 - (Optional) additional tracking logs (e.g., ray / 2D tracking board)
@@ -32,6 +32,62 @@ Outputs are written to per-session folders under `ExperimentOutputs/` as CSV.
 
 ---
 
+## Testing without VR (desktop simulator)
+
+You can run and test the experiment in the Editor (or a desktop build) **without a VR headset or controllers** using the keyboard to simulate responses.
+
+1. **Add the keyboard input**  
+   In your scene, add a GameObject (e.g. “DesktopSimulator”) and add the **KeyboardResponseInput** component (`Assets/Scripts/Experiment/KeyboardResponseInput.cs`). Assign its **experiment** field to your `SimpleExperimentVR` component.
+
+2. **Default keys** (only active when a trial is awaiting a response):
+   - **1** or **Left Arrow** → Left  
+   - **2** or **Up Arrow** → Both  
+   - **3** or **Right Arrow** → Right  
+
+   You can change these in the Inspector (Left Key, Both Key, Right Key and the Alt keys).
+
+3. **Run in Editor**  
+   Press Play. The audio and trial schedule run as usual. When you hear an alert, press **1**, **2**, or **3** (or the arrow keys) to submit the direction. Output CSVs are still written to `ExperimentOutputs/`.
+
+4. **Optional**  
+   Disable or remove **ViveThumbstickResponseInput** on the same scene if you want only keyboard input during testing. With both enabled, whichever input fires first counts.
+
+This does not simulate head or controller pose; it only replaces response input so you can test the trial flow, timing, and CSV/audio without hardware.
+
+---
+
+## One build, many configurations (Experiment folder)
+
+You can run **one build** and select **Subject (1–20)** and **Session (1–24)**. The app loads the matching CSV and Mixed WAV from an external **Experiment** folder.
+
+1. **Experiment folder layout** (e.g. `C:\Users\...\Experiment`):
+   - `Subject_01/` … `Subject_20/`
+   - In each: `SubjXX_SessYY_alert_info.csv` and `SubjXX_SessYY_*_Mixed.wav` (e.g. `Subj01_Sess01_N0.846_mode1_mode2_rep2_Mixed.wav`).
+
+2. **In the scene**:
+   - Add (or use) a GameObject with **ExperimentSessionConfigurator**.
+   - Assign **experiment** to your `SimpleExperimentVR` component.
+   - Set **Experiment Root Path** to the Experiment folder (e.g. `C:\Users\rezaeia2\Desktop\Tracking Test Project\Experiment`).
+   - Set **Subject** (1–20) and **Session** (1–24).
+   - On the `SimpleExperimentVR` component, enable **Use External Session Config** (and leave **Alert Schedule Csv** / **Combined Stimulus Clip** unassigned for that mode).
+
+3. Press Play: the configurator loads the CSV and the matching Mixed WAV, injects them into the experiment, and starts the run. Outputs go to `ExperimentOutputs/<timestamp>_PXX_SessYY/`.
+
+### EEG baseline (Session 0)
+
+At the start of each subject’s data collection, run a **5-minute EEG baseline** with no task:
+
+- Set **Session = 0** (and **Subject** as the participant, e.g. 1–20).
+- The app shows only a **fixation cross**; participants wear the VR headset, fixate on the cross, refrain from speaking, and minimize movement.
+- **EEG** (and optionally **eye tracking**) are recorded for 5 minutes into a session folder named `..._PXX_Baseline/` (e.g. `ExperimentOutputs/<timestamp>_P01_Baseline/`). No audio or trials run.
+- After 5 minutes the app closes (or shows a completion message then quits).
+
+**Scene setup:** Add a GameObject with the **BaselineRunner** component. Assign it to **ExperimentSessionConfigurator → Baseline Runner**. You can leave **Fixation Cross Root** empty and a simple “+” will be created at runtime, or assign your own Canvas/UI. Baseline duration is 300 s by default (editable in BaselineRunner).
+
+**Recommended order per subject:** Run Session 0 (baseline) once, then run Session 1 … 24 for the main task.
+
+---
+
 ## Configure an experiment run (typical)
 
 ### `SimpleExperimentVR` (experiment driver)
@@ -53,6 +109,17 @@ In the scene, find the GameObject with `SimpleExperimentVR` and set:
 
 The project uses a stable shared timebase: `experiment.AudioTime` (DSP-clock aligned to the scheduled audio start) so logs can be aligned.
 
+### VR target-tracking task (joystick / controller)
+
+The main task is a **continuous target-tracking game** where the participant tracks a moving target using a **VR joystick / controller thumbstick**, while also responding to sound direction.
+
+Relevant scripts (non-exhaustive):
+- `Assets/TrackingCsvLogger2D.cs`: logs 2D tracking-board target and cursor positions and error to `Tracking2D.csv`
+- `Assets/Scripts/Experiment/RayTrackingCsvLogger.cs`: logs VR ray / target positions and on-target state to `RayTracking.csv`
+- `Assets/Scripts/Experiment/ViveThumbstickResponseInput.cs`: reads XR controller input (thumbstick/joystick) and forwards responses to `SimpleExperimentVR`
+
+These use the same experiment timebase (`experiment.AudioTime`) so tracking, responses, and audio timing are aligned.
+
 ### Eye tracking logger (Varjo)
 
 `Assets/VarjoEyeTrackingCsvLogger.cs` writes `EyeTracking.csv`.
@@ -71,6 +138,20 @@ Important setting:
 ---
 
 ## Data output
+
+### VR tracking task screenshot
+
+Once you have a build or are running in the Unity Editor, you can capture a screenshot of the tracking game and add it to the repo, for example at:
+
+- `docs/vr-tracking-task.png`
+
+Then reference it here:
+
+```markdown
+![VR tracking task](docs/vr-tracking-task.png)
+```
+
+This README cannot capture a screenshot automatically; you need to run the scene and save the image from your own machine.
 
 ### Where files go
 
@@ -96,15 +177,16 @@ This repo includes git-based dependencies (portable):
 - `com.labstreaminglayer.lsl4unity`: `https://github.com/labstreaminglayer/LSL4Unity.git`
 - `com.bci4kids.bciessentials`: `https://github.com/kirtonBCIlab/bci-essentials-unity.git`
 
-However, it also currently references **machine-specific local `.tgz` files** (not included in this repo), e.g.:
+**Local / file packages** (you must obtain the `.tgz` files):
 
-- `com.threespacelab.imotions.varjointegration`: `file:C:/Users/labadmin/Desktop/...`
-- `com.threespacelab.imotions.core` and `com.varjo.xr`: `file:../Library/PackageCache/...`
+- **com.varjo.xr** (Varjo XR Unity SDK) — required for Varjo eye tracking and the iMotions Varjo integration. The manifest expects `file:com.varjo.xr-3.5.0.tgz`.
+  - Get the Varjo XR package (e.g. from [Varjo Developer](https://developer.varjo.com/) or from your lab’s copy).
+  - Place `com.varjo.xr-3.5.0.tgz` in the project’s **Packages** folder (next to `manifest.json`), or put it elsewhere and set the path in `manifest.json` (e.g. `"com.varjo.xr": "file:C:/path/to/com.varjo.xr-3.5.0.tgz"`).
+- **com.threespacelab.imotions.varjointegration** and **com.threespacelab.imotions.core** — iMotions Varjo integration; paths are set in `manifest.json` (local tarball or PackageCache path).
 
-If you clone this from GitHub onto a new machine, Unity may fail to resolve these `file:` dependencies until you:
+**AR Foundation** is included from the Unity registry (`com.unity.xr.arfoundation` 4.2.10) for the iMotions mixed-reality components.
 
-- obtain those `.tgz` packages and update `Packages/manifest.json` to point to valid paths, **or**
-- replace them with an alternative distribution method (registry/git) that your team uses for Varjo/iMotions packages.
+If you clone this onto a new machine, resolve any missing `file:` packages by obtaining the `.tgz` files and placing them where `manifest.json` points, or by updating the paths in `manifest.json`.
 
 ---
 

@@ -139,10 +139,8 @@ public class LslCsvLogger : MonoBehaviour
         int samplesReturned = inlet.pull_chunk(dataBuffer, tsBuffer);
         if (samplesReturned <= 0) return;
 
-        // Match the eye logger’s time base:
-        // - experiment.AudioTime if provided
-        // - otherwise Time.time
-        float t = (experiment != null) ? experiment.AudioTime : Time.time;
+        // Match the eye logger’s time base (use Time.time during baseline when experiment is not running)
+        float t = (experiment != null && experiment.IsRunning) ? experiment.AudioTime : Time.time;
 
         // Write one row per LSL sample.
         // Note: time_sec here is the Unity/experiment clock at the moment of logging (same as eye logger),

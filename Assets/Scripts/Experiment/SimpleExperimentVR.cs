@@ -40,6 +40,10 @@ public class SimpleExperimentVR : MonoBehaviour
     public TextAsset alertScheduleCsv;
     public string inputCsvCopyName = "InputAlertSchedule.csv";
 
+    [Header("External session (Experiment folder)")]
+    [Tooltip("When true, session CSV and audio are loaded by ExperimentSessionConfigurator; leave alertScheduleCsv and combinedStimulusClip unset.")]
+    public bool useExternalSessionConfig = false;
+
     [Header("Trial timing")]
     public bool endTrialAtNextStart = true;
     public float responseWindowSeconds = 2.0f;
@@ -108,7 +112,7 @@ public class SimpleExperimentVR : MonoBehaviour
     {
         ExperimentPaths.InitSession(participantId, conditionName);
 
-        if (alertScheduleCsv != null)
+        if (!useExternalSessionConfig && alertScheduleCsv != null)
         {
             string copyPath = ExperimentPaths.PathInSession(inputCsvCopyName);
             ExperimentPaths.WriteAllText(copyPath, alertScheduleCsv.text);
@@ -122,6 +126,13 @@ public class SimpleExperimentVR : MonoBehaviour
             Debug.LogError("SimpleExperimentVR: stimulusSource is not assigned.");
             return;
         }
+
+        if (useExternalSessionConfig)
+        {
+            // CSV and audio are set by ExperimentSessionConfigurator; it will call Begin() when ready.
+            return;
+        }
+
         if (combinedStimulusClip == null)
         {
             Debug.LogError("SimpleExperimentVR: combinedStimulusClip is not assigned.");
@@ -143,6 +154,21 @@ public class SimpleExperimentVR : MonoBehaviour
 
         if (playOnStart)
             Begin();
+    }
+
+    /// <summary>
+    /// Called by ExperimentSessionConfigurator when loading from the external Experiment folder.
+    /// Sets participant/condition, parses CSV, copies it to session output, sets the audio clip, and is ready for Begin().
+    /// </summary>
+    public void SetSessionFromExternal(string csvText, AudioClip audioClip)
+    {
+        ExperimentPaths.InitSession(participantId, conditionName);
+
+        string copyPath = ExperimentPaths.PathInSession(inputCsvCopyName);
+        ExperimentPaths.WriteAllText(copyPath, csvText);
+
+        _trials = AlertScheduleCsv.Parse(csvText);
+        combinedStimulusClip = audioClip;
     }
 
     public void Begin()
@@ -351,7 +377,7 @@ public class SimpleExperimentVR : MonoBehaviour
         string x = s.Trim().ToLower();
 
         if (x == "l" || x.Contains("left")) return AlertDirection.Left;
-        if (x == "b" || x.Contains("both") || x.Contains("up")) return AlertDirection.Both;
+        if (x == "b" || x.Contains("both") || x.Contains("up") || x.Contains("back")) return AlertDirection.Both;
         if (x == "r" || x.Contains("right")) return AlertDirection.Right;
 
         if (x == "0") return AlertDirection.Left;
